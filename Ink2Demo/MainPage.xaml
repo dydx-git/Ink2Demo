@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="Ink2Demo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Ink2Demo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <local:MarkerPen x:Key="MarkerPen"/>
+    </Page.Resources>
+
+    <Grid>
+        <InkCanvas x:Name="myInkCanvas"/>
+
+        <CommandBar Name="myCommandBar" IsOpen="True">
+            <CommandBar.Content>
+                <InkToolbar x:Name="myInkToolbar" TargetInkCanvas="{x:Bind myInkCanvas}">
+                    <InkToolbarBallpointPenButton Name="penButton" />
+                    <InkToolbarCustomPenButton Name="markerButton" CustomPen="{StaticResource MarkerPen}" Palette="{x:Bind penButton.Palette}" >
+                        <SymbolIcon Symbol="Highlight" />
+                        <InkToolbarCustomPenButton.ConfigurationContent>
+                            <InkToolbarPenConfigurationControl />
+                        </InkToolbarCustomPenButton.ConfigurationContent>
+                    </InkToolbarCustomPenButton>
+                </InkToolbar>
+            </CommandBar.Content>
+        </CommandBar>
+
+        <Button Click="Button_Click" Content="Add colors to marker"/>
+    </Grid>
+</Page>
